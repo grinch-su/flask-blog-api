@@ -86,7 +86,7 @@ def updatePost(postId):
     return jsonify(session=result)
 
 
-@api.route('/post/<int:postId>')
+@api.route('/post/<int:postId>', methods=['DELETE'])
 def deletePost(postId):
     curr_session = db.session
     Posts.query.filter_by(id=postId).delete()
