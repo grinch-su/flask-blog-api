@@ -2,7 +2,6 @@
 ### Python template
 # Byte-compiled / optimized / DLL files
 __pycache__/
-*.py[cod]
 *$py.class
 
 # C extensions
@@ -13,11 +12,9 @@ __pycache__/
 env/
 build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
@@ -57,7 +54,6 @@ coverage.xml
 local_settings.py
 
 # Flask stuff:
-instance/
 .webassets-cache
 
 # Scrapy stuff:
@@ -95,4 +91,13 @@ ENV/
 # Rope project settings
 .ropeproject
 .idea/
+migrations/
 
+blog/.DS_Store
+blog/node_modules/
+blog/npm-debug.log*
+blog/yarn-debug.log*
+blog/yarn-error.log*
+blog/test/unit/coverage
+blog/test/e2e/reports
+blog/selenium-debug.log
