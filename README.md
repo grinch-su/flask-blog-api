@@ -1,5 +1,3 @@
-## PyBlog
-
 ## Build Setup
 
 ```
