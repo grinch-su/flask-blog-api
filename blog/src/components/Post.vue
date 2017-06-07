@@ -1,7 +1,6 @@
 <template>
   <div class="">
-    <h1>{{ title }}</h1>
-    <router-view></router-view>
+    <h1>post title</h1>
   </div>
 </template>
 
@@ -10,7 +9,7 @@ export default {
   name: 'post',
   data () {
     return {
-      title: 'Post title'
+      title: 'Post'
     }
   }
 }
