@@ -76,6 +76,13 @@ def getPosts():
     return jsonify([post.to_json() for post in data])
 
 
+# get post
+@api.route('/post/<int:postId>', methods=['GET'])
+def get_post(postId):
+    data = Posts.query.get(postId)
+    return jsonify(post=data.to_json())
+
+
 # edit post
 @api.route('/post/<int:postId>', methods=['PATCH'])
 def updatePost(postId):

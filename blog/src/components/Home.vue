@@ -6,8 +6,7 @@
     <div v-if="error" class="error">
       {{ error }}
     </div>
-    <!--<div v-for="post in orderBy(posts, 'date', -1)">-->
-    <div v-for="post in posts">
+    <div v-for="post in orderBy(posts, 'date', -1)">
       <h1>{{ post.title }}</h1>
       <p>Опубликована: {{ post.date | ago }}</p>
       <p>{{ post.content | truncate(30) }}</p>
