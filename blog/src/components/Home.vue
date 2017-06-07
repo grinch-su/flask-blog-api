@@ -9,7 +9,7 @@
     <div v-for="post in orderBy(posts, 'date', -1)">
       <h1>{{ post.title }}</h1>
       <p>Опубликована: {{ post.date }}</p>
-      <p>{{ post.content | truncate(30) }}</p>
+      <p>{{ post.content | truncate(70) }}</p>
       <router-link :to="{ name: 'post', params: { id: post.id }}">read more...</router-link>
     </div>
 

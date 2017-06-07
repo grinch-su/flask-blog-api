@@ -12,7 +12,7 @@ export default new Router({
   mode: 'history',
   base: __dirname,
   routes: [
-    { path: '/', name: 'home', component: Home },
+    { path: '/', name: 'home', component: Home, meta: {title: 'Home'} },
     { path: '/post/:id', name: 'post', component: Post },
     { path: '/projects', name: 'projects', component: Projects },
     { path: '/contacts', name: 'contacts', component: Contacts },
