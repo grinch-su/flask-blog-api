@@ -8,8 +8,15 @@
 </template>
 
 <script>
+import Home from './components/Home.vue'
+import Post from './components/Post.vue'
+import Projects from './components/Projects.vue'
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    Home, Post, Projects
+  }
 }
 </script>
 
@@ -21,5 +28,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.router-link-exact-active {
+  color: aqua;
 }
 </style>
