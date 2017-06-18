@@ -12,7 +12,7 @@ api = Flask(__name__)
 api.config.update(
     DEBUG=True,
     SECRET_KEY='key',
-    SQLALCHEMY_DATABASE_URI='postgresql://postgres:8497@localhost/simpleblog',
+    SQLALCHEMY_DATABASE_URI='postgresql://postgres:8497@localhost/blog',
     SQLALCHEMY_TRACK_MODIFICATIONS=True,
     SQLALCHEMY_ECHO=True
 )
@@ -21,6 +21,12 @@ db = SQLAlchemy(api)
 migrate = Migrate(api, db)
 manager = Manager(api)
 manager.add_command('db', MigrateCommand)
+
+
+@manager.command
+def create_db():
+    db.create_all()
+    return ('All tables created')
 
 
 class Posts(db.Model):
