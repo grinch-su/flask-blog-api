@@ -12,11 +12,9 @@
       <p>{{ post.content | truncate(70) }}</p>
       <router-link :to="{ name: 'post', params: { id: post.id }}">read more...</router-link>
     </div>
-
-    <router-view class="view"></router-view>
-
   </div>
 </template>
+
 <script>
 export default {
   name: 'home',
@@ -34,7 +32,7 @@ export default {
       this.loading = true
       this.$http.get(this.url + 'posts').then(res => {
         this.loading = false
-        this.posts = res.body
+        this.posts = res.body.posts
       }, res => {
         console.log(res)
         if (res.body === null) {
@@ -52,11 +50,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
 
-a {
-  color: #42b983;
-}
 </style>

@@ -11,25 +11,32 @@
 import Home from './components/Home.vue'
 import Post from './components/Post.vue'
 import Projects from './components/Projects.vue'
+import Contacts from './components/Contacts.vue'
 
 export default {
   name: 'app',
   components: {
-    Home, Post, Projects
+    Home, Post, Projects, Contacts
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-.router-link-exact-active {
-  color: aqua;
-}
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+  }
+  .router-link-exact-active {
+    color: aqua;
+  }
+  h1, h2 {
+  font-weight: normal;
+  }
+  a {
+  color: #42b983;
+  }
 </style>

@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "keen-ui": "1.0.0",
+    "medium-sdk": "0.0.4",
     "vue": "^2.3.3",
     "vue-progressbar": "0.7.2",
     "vue-quill-editor": "2.2.1",

@@ -1,6 +1,10 @@
 <template>
 <div>
     <h1>{{title}}</h1>
+    <div>
+      <p>Skype: grisha9763</p>
+      <p>Mobile: +79856646689</p>
+    </div>
 </div>
 </template>
 
@@ -17,11 +21,4 @@ export default {
 </script>
 
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-
-a {
-  color: #42b983;
-}
 </style>

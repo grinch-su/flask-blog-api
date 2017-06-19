@@ -1,8 +1,8 @@
 <template>
   <div class="" :key="post.id">
     <h1>{{ post.title }}</h1>
-    <p>{{ post.date }}</p>
-    <p>{{ post.edit_date }}</p>
+    <p>Date created:{{ post.date }}</p>
+    <p>Date edit:{{ post.edit_date }}</p>
     <p>{{ post.content }}</p>
   </div>
 </template>

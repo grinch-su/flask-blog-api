@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 from datetime import datetime
 
+from github import Github
+
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
-
 from flask_cors import CORS
 
 api = Flask(__name__)
@@ -14,8 +15,9 @@ api.config.update(
     SECRET_KEY='key',
     SQLALCHEMY_DATABASE_URI='postgresql://postgres:8497@localhost/blog',
     SQLALCHEMY_TRACK_MODIFICATIONS=True,
-    SQLALCHEMY_ECHO=True
+    SQLALCHEMY_ECHO=False
 )
+
 CORS(api)
 db = SQLAlchemy(api)
 migrate = Migrate(api, db)
@@ -79,7 +81,7 @@ def createPost():
 @api.route('/posts', methods=['GET'])
 def getPosts():
     data = Posts.query.all()
-    return jsonify([post.to_json() for post in data])
+    return jsonify(posts=[post.to_json()for post in data])
 
 
 # get post
@@ -119,6 +121,22 @@ def deletePost(postId):
     Posts.query.filter_by(id=postId).delete()
     curr_session.commit()
     return getPosts()
+
+
+@api.route('/repos', methods=['GET'])
+def get_all_repos_with_GitHub():
+    g = Github('22f538df90712bb720e4b09d149edcaf35d0834a')
+    repos = []
+    for repo in g.get_user().get_repos():
+        repos.append({
+            "name": repo.name,
+            "updated_at": repo.updated_at,
+            "homepage": repo.homepage,
+            "url": repo.html_url,
+            "description": repo.description,
+            "lang": repo.language
+        })
+    return jsonify(repos=repos)
 
 
 if __name__ == '__main__':
