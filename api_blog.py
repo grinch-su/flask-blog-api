@@ -3,14 +3,14 @@ from datetime import datetime
 
 from github import Github
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Blueprint
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
-from flask_script import Manager
+from flask_script import Manager, Server
 from flask_cors import CORS
 
-api = Flask(__name__)
-api.config.update(
+app = Flask(__name__)
+app.config.update(
     DEBUG=True,
     SECRET_KEY='key',
     SQLALCHEMY_DATABASE_URI='postgresql://postgres:8497@localhost/blog',
@@ -18,10 +18,11 @@ api.config.update(
     SQLALCHEMY_ECHO=False
 )
 
-CORS(api)
-db = SQLAlchemy(api)
-migrate = Migrate(api, db)
-manager = Manager(api)
+CORS(app)
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+manager = Manager(app)
+manager.add_command('run', Server(host='0.0.0.0', port=8080))
 manager.add_command('db', MigrateCommand)
 
 
@@ -58,7 +59,7 @@ class Posts(db.Model):
     def __repr__(self):
         return '<Posts {}{})>'.format(self.title, self.content)
 
-
+api = Blueprint('api',__name__, url_prefix='/api')
 # create post
 @api.route('/post', methods=['POST'])
 def createPost():
@@ -139,5 +140,6 @@ def get_all_repos_with_GitHub():
     return jsonify(repos=repos)
 
 
+app.register_blueprint(api)
 if __name__ == '__main__':
     manager.run()

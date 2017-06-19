@@ -29,15 +29,14 @@
         title: 'Projects',
         repos: null,
         loading: false,
-        error: null,
-        url: 'http://localhost:5000/'
+        error: null
       }
     },
     methods: {
       getAllRepos: function () {
         this.error = this.repos = null
         this.loading = true
-        this.$http.get(this.url + 'repos').then(res => {
+        this.$http.get('/api/repos').then(res => {
           this.loading = false
           this.repos = res.body.repos
         }, res => {

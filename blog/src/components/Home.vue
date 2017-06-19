@@ -22,15 +22,14 @@ export default {
     return {
       posts: null,
       loading: false,
-      error: null,
-      url: 'http://localhost:5000/'
+      error: null
     }
   },
   methods: {
     getAllPosts: function () {
       this.error = this.posts = null
       this.loading = true
-      this.$http.get(this.url + 'posts').then(res => {
+      this.$http.get('/api/posts').then(res => {
         this.loading = false
         this.posts = res.body.posts
       }, res => {

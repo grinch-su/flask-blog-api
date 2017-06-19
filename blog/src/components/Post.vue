@@ -15,7 +15,7 @@ export default {
       loading: false,
       post: {},
       error: null,
-      url: 'http://localhost:5000/post/'
+      url: 'post/'
     }
   },
   created () {
@@ -27,7 +27,7 @@ export default {
   methods: {
     getPost: function () {
       this.loading = true
-      this.$http.get(this.url + this.$route.params.id).then(res => {
+      this.$http.get('/api/post/' + this.$route.params.id).then(res => {
         this.loading = false
         this.post = res.body.post
       }, res => {
