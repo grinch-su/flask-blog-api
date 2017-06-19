@@ -126,7 +126,7 @@ def deletePost(postId):
 
 @api.route('/repos', methods=['GET'])
 def get_all_repos_with_GitHub():
-    g = Github('22f538df90712bb720e4b09d149edcaf35d0834a')
+    g = Github('734546eb006674e95d2fbf6419a9c01e5c491169')
     repos = []
     for repo in g.get_user().get_repos():
         repos.append({
