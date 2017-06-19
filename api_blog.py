@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from datetime import datetime
+import os
 
 from github import Github
 
@@ -126,7 +127,7 @@ def deletePost(postId):
 
 @api.route('/repos', methods=['GET'])
 def get_all_repos_with_GitHub():
-    g = Github('734546eb006674e95d2fbf6419a9c01e5c491169')
+    g = Github(os.environ['APP_GITHUB_TOKEN'])
     repos = []
     for repo in g.get_user().get_repos():
         repos.append({
