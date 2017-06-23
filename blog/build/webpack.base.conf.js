@@ -1,6 +1,6 @@
 var path = require('path')
 var utils = require('./utils')
-var config = require('../config')
+var config = require('../../flask-blog-api/blog/config/index')
 var vueLoaderConfig = require('./vue-loader.conf')
 
 function resolve (dir) {
