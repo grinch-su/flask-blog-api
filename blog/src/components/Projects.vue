@@ -2,7 +2,7 @@
 <div>
   <h1>{{ title }}</h1>
   <div class="loading" v-if="loading">
-    <h1>Закгрузка...</h1>
+    <h1>Loading...</h1>
   </div>
   <div class="card-project" v-for="rep in repos">
     <div class="header">
@@ -11,7 +11,7 @@
     </div>
     <div class="container">
       <p>{{ rep.description }}</p>
-      <p>Updated:{{ rep.updated_at }}</p>
+      <p>Updated: {{ rep.updated_at }}</p>
     </div>
     <div class="footer">
       <a :href="rep.homepage" target="_blank">Demo</a>
@@ -42,7 +42,7 @@
         }, res => {
           console.log(res)
           if (res.body === null) {
-            this.error = 'Нет постов'
+            this.error = 'Not repository'
           }
         })
       }

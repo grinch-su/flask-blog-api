@@ -1,14 +1,14 @@
 <template>
   <div class="post">
     <div class="loading" v-if="loading">
-      <h1>Закгрузка...</h1>
+      <h1>Loading...</h1>
     </div>
     <div v-if="error" class="error">
       {{ error }}
     </div>
     <div v-for="post in orderBy(posts, 'date', -1)">
       <h1>{{ post.title }}</h1>
-      <p>Опубликована: {{ post.date }}</p>
+      <p>Published: {{ post.date }}</p>
       <p>{{ post.content | truncate(70) }}</p>
       <router-link :to="{ name: 'post', params: { id: post.id }}">read more...</router-link>
     </div>
@@ -35,7 +35,7 @@ export default {
       }, res => {
         console.log(res)
         if (res.body === null) {
-          this.error = 'Нет постов'
+          this.error = 'Not posts'
         }
       })
     }
