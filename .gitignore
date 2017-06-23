@@ -17,7 +17,6 @@ eggs/
 lib64/
 parts/
 sdist/
-blog/dist/
 var/
 wheels/
 *.egg-info/
