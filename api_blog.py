@@ -4,7 +4,7 @@ import os
 
 from github import Github
 
-from flask import Flask, request, jsonify, Blueprint
+from flask import Flask, request, jsonify, Blueprint, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager, Server
@@ -31,6 +31,12 @@ manager.add_command('db', MigrateCommand)
 def create_db():
     db.create_all()
     return ('All tables created')
+
+
+# class Users(db.Model):
+#     __tablename__ = 'users'
+#     name = db.Column(db.String, nullable=False)
+#     email = db.Column(db.String, nullable=False)
 
 
 class Posts(db.Model):
@@ -61,6 +67,8 @@ class Posts(db.Model):
         return '<Posts {}{})>'.format(self.title, self.content)
 
 api = Blueprint('api',__name__, url_prefix='/api')
+
+
 # create post
 @api.route('/post', methods=['POST'])
 def createPost():
@@ -83,6 +91,8 @@ def createPost():
 @api.route('/posts', methods=['GET'])
 def getPosts():
     data = Posts.query.all()
+    if not data:
+        return jsonify(posts=None)
     return jsonify(posts=[post.to_json()for post in data])
 
 
@@ -90,11 +100,13 @@ def getPosts():
 @api.route('/post/<int:postId>', methods=['GET'])
 def get_post(postId):
     data = Posts.query.get(postId)
+    if not data:
+        abort(404)
     return jsonify(post=data.to_json())
 
 
 # edit post
-@api.route('/post/<int:postId>', methods=['PATCH'])
+@api.route('/post/<int:postId>', methods=['PUT'])
 def updatePost(postId):
     global post
 
@@ -110,6 +122,7 @@ def updatePost(postId):
     except:
         curr_session.rollback()
         curr_session.flush()
+        return jsonify(message='No post found')
     postId = post.id
     data = Posts.query.filter_by(id=postId).first()
 

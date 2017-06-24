@@ -8,17 +8,17 @@
 </template>
 
 <script>
-import Home from './components/Home.vue'
-import Post from './components/Post.vue'
-import Projects from './components/Projects.vue'
-import Contacts from './components/Contacts.vue'
+  import Home from './components/Home.vue'
+  import Post from './components/Post.vue'
+  import Projects from './components/Projects.vue'
+  import Contacts from './components/Contacts.vue'
 
-export default {
-  name: 'app',
-  components: {
-    Home, Post, Projects, Contacts
+  export default {
+    name: 'app',
+    components: {
+      Home, Post, Projects, Contacts
+    }
   }
-}
 </script>
 
 <style>

@@ -4,12 +4,14 @@ import Vue from 'vue'
 import resource from 'vue-resource'
 import VueQuillEditor from 'vue-quill-editor'
 import Vue2Filters from 'vue2-filters'
+import Icon from 'vue-awesome/components/Icon'
 import App from './App'
 import router from './router'
 
 Vue.use(Vue2Filters)
 Vue.use(resource)
 Vue.use(VueQuillEditor)
+Vue.use(Icon)
 
 Vue.config.productionTip = false
 
