@@ -9,7 +9,7 @@ import Contacts from '@/components/Contacts.vue'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
   base: __dirname,
   routes: [
     { path: '/', name: 'home', component: Home, meta: {title: 'Home'} },
