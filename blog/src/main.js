@@ -30,7 +30,7 @@ const messages = {
       source: 'Source'
     },
     post: {
-      not_posts: 'Not posts',
+      not_posts: 'No articles',
       published: 'Published',
       updated: 'Updated',
       read_more: 'Read more'

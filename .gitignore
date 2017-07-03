@@ -1,7 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template
 # Byte-compiled / optimized / DLL files
-__pycache__/
 *$py.class
 
 # C extensions
@@ -14,7 +13,6 @@ develop-eggs/
 downloads/
 eggs/
 .eggs/
-lib64/
 parts/
 sdist/
 blog/dist/
@@ -92,9 +90,9 @@ ENV/
 .ropeproject
 .idea/
 migrations/
-
+__pycache__
 blog/.DS_Store
-blog/node_modules/
+node_modules/
 blog/npm-debug.log*
 blog/yarn-debug.log*
 blog/yarn-error.log*

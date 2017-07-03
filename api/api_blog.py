@@ -4,13 +4,25 @@ import os
 
 from github import Github
 
-from flask import Flask, request, jsonify, Blueprint, abort
+from flask import Flask, request, jsonify, Blueprint, abort, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager, Server
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
-app = Flask(__name__)
+class CustomFlask(Flask):
+  jinja_options = Flask.jinja_options.copy()
+  jinja_options.update(dict(
+    block_start_string='(%',
+    block_end_string='%)',
+    variable_start_string='((',
+    variable_end_string='))',
+    comment_start_string='(#',
+    comment_end_string='#)',
+  ))
+
+app = CustomFlask(__name__)
+
 app.config.update(
     DEBUG=True,
     SECRET_KEY='key',
@@ -19,7 +31,6 @@ app.config.update(
     SQLALCHEMY_ECHO=False
 )
 
-CORS(app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 manager = Manager(app)
@@ -72,6 +83,8 @@ class Post(db.Model):
         return '<Posts {}{})>'.format(self.title, self.content)
 
 api = Blueprint('api',__name__, url_prefix='/api')
+
+CORS(api)
 
 
 # create post
@@ -145,9 +158,9 @@ def deletePost(postId):
 
 @api.route('/repos', methods=['GET'])
 def get_all_repos_with_GitHub():
-    g = Github(os.environ['APP_GITHUB_TOKEN'])
+    gh = Github(os.environ['APP_GITHUB_TOKEN'])
     repos = []
-    for repo in g.get_user().get_repos():
+    for repo in gh.get_user().get_repos():
         repos.append({
             "name": repo.name,
             "updated_at": repo.updated_at,
@@ -157,8 +170,33 @@ def get_all_repos_with_GitHub():
             "lang": repo.language
         })
     return jsonify(repos=repos)
-
-
 app.register_blueprint(api)
+
+
+@app.route("/", methods=['GET'])
+def index():
+    return render_template('index.html')
+
+
+@app.route("/api-map", methods=['GET'])
+def site_map():
+    import urllib
+    output = []
+    for rule in app.url_map.iter_rules():
+        methods = []
+        for m in rule.methods:
+            meth = urllib.parse.unquote("{}".format(m))
+            if m not in ('OPTIONS','HEAD'):
+                methods.append(meth)
+        line = {
+            'methods': methods,
+            'rule': urllib.parse.unquote("{}".format(rule))
+        }
+        if '/api/' in urllib.parse.unquote("{}".format(rule)):
+            output.append(line)
+        else:
+            continue
+    return jsonify(links=output)
+
 if __name__ == '__main__':
     manager.run()

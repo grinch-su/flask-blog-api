@@ -1,12 +1,12 @@
 <template>
-  <div class="post">
+  <div class="posts">
     <div class="loading" v-if="loading > 1">
       <h1> {{ $t('loading') }}...</h1>
     </div>
     <div v-if="error" class="error">
       {{ error.status }},{{ error.statusText }}
     </div>
-    <h1 class="not-posts" v-if="posts === null">{{ $t('not_posts') }}</h1>
+    <h1 class="not-posts" v-if="posts === null">{{ $t('post.not_posts') }}</h1>
     <div class="card-blog" v-for="post in orderBy(posts, 'date', -1)">
       <div class="card-header">
         <router-link :to="{ name: 'post', params: { id: post.id }}">
@@ -58,6 +58,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .posts {
+    animation: fadein 2s;
+    transition: 0.3s;
+  }
   .not-posts {
     color: rgba(120, 124, 129, 0.51);
     text-align: center;
@@ -79,7 +83,6 @@ export default {
     display: inline-block;
     margin: 0.5em;
     padding: 1em;
-    animation: fadein 2s;
   }
 
   .card-header a {

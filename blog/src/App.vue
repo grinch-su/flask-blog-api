@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-      <ul id="nav">
-        <li>
-          <router-link v-bind:to="'/'">{{ $t('nav.blog') }}</router-link>
-        </li>
-        <li>
-          <router-link v-bind:to="'/projects'">{{ $t('nav.projects') }}</router-link>
-        </li>
-        <li>
-          <router-link v-bind:to="'/contacts'">{{ $t('nav.contacts') }}</router-link>
-        </li>
-      </ul>
+    <ul id="nav">
+      <li>
+        <router-link v-bind:to="'/'">{{ $t('nav.blog') }}</router-link>
+      </li>
+      <li>
+        <router-link v-bind:to="'/projects'">{{ $t('nav.projects') }}</router-link>
+      </li>
+      <li>
+        <router-link v-bind:to="'/contacts'">{{ $t('nav.contacts') }}</router-link>
+      </li>
+    </ul>
     <label for="locale"></label>
     <select id="locale" v-model="locale">
       <option value="en">EN</option>
@@ -46,8 +46,10 @@
 </script>
 
 <style>
-  body {
-    background-color: #f2f2f2;
+  html {
+    margin: 0;
+    padding: 0;
+    background-color: #dddddd;
   }
   @keyframes fadein {
     0% {
@@ -61,8 +63,6 @@
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #2c3e50;
-    margin-top: 2%;
     padding-left: 10%;
     padding-right: 10%;
   }
@@ -87,7 +87,7 @@
   }
   #nav li a {
     text-decoration: none;
-    color: #ccc;
+    color: #767676;
     font: 25px/1 Helvetica, Verdana, sans-serif;
     text-transform: uppercase;
     transition: all 0.5s ease;
@@ -105,5 +105,11 @@
     font-weight: bold;
     color: #333;
   }
-
+  #locale {
+    appearance: none;
+    background-color: #000;
+    color: white;
+    padding: 3px;
+    font: 16px/1 Helvetica, Verdana, sans-serif;
+  }
 </style>

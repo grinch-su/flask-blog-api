@@ -8,7 +8,7 @@
         <a href="tg://resolve?domain=grinch_su"><icon name="telegram" scale="3"></icon></a>
       </li>
       <li>
-        <a href=""><icon name="medium" scale="3"></icon></a>
+        <a href="https://medium.com/grinch-su"><icon name="medium" scale="3"></icon></a>
       </li>
     </ul>
   </div>

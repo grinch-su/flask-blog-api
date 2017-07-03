@@ -1,0 +1,32 @@
+html {
+    background: #e1e3e6;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+#api-map {
+    margin-left: 30%;
+    margin-right: 30%;
+}
+.method {
+    text-decoration: none;
+    color: white;
+    font-size: larger;
+    padding: 4px;
+    background-color: #43c57e;
+    border-radius: 3px;
+}
+
+.link {
+    margin-top: 1%;
+    padding: 2%;
+    background-color: rgba(87, 194, 83, 0.21);
+    border-radius: 2px;
+}
+
+.rule {
+    float: right;
+    margin-top: -17px;
+
+}

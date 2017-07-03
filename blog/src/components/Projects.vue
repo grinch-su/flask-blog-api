@@ -55,10 +55,12 @@
   .card-project {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
+    background-color: white;
     width: 28%;
     display: inline-block;
     margin: 0.5em;
     padding: 1%;
+    animation: fadein 2s;
   }
 
   .loading {
