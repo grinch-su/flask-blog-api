@@ -1,8 +1,7 @@
 <template>
 <div>
-  <h1>{{ title }}</h1>
   <div class="loading" v-if="loading">
-    <h1>Loading...</h1>
+    <h1>{{ $t('loading') }}...</h1>
   </div>
   <div class="card-project" v-for="rep in repos">
     <div class="header">
@@ -11,11 +10,11 @@
     </div>
     <div class="container">
       <p>{{ rep.description }}</p>
-      <p>Updated: {{ rep.updated_at }}</p>
+      <p>{{ $t('project.updated') }}: {{ rep.updated_at }}</p>
     </div>
     <div class="footer">
-      <a :href="rep.homepage" target="_blank">Demo</a>
-      <a :href="rep.url" target="_blank">GitHub</a>
+      <a class="button" :href="rep.homepage" target="_blank">{{ $t('project.demo') }}</a>
+      <a class="button" :href="rep.url" target="_blank">{{ $t('project.source') }}</a>
     </div>
   </div>
 </div>
@@ -26,7 +25,6 @@
     name: 'projects',
     data () {
       return {
-        title: 'Projects',
         repos: null,
         loading: false,
         error: null
@@ -57,15 +55,32 @@
   .card-project {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    width: 40%;
-    border-radius: 5px;
+    width: 28%;
     display: inline-block;
-    margin: 1em;
+    margin: 0.5em;
+    padding: 1%;
   }
+
+  .loading {
+    text-align: center;
+  }
+
   .card-project:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   }
+
+  .header{
+    text-align: center;
+  }
+
   .container {
     padding: 2px 16px;
+  }
+
+  .button {
+    background-color: #23241f;
+    text-decoration: none;
+    color: white;
+    padding: 5px;
   }
 </style>

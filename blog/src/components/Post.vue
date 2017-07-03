@@ -3,11 +3,11 @@
   <div class="error" v-if="error">
     <h1>Error {{ error.status }}, {{ error.statusText }}</h1>
   </div>
-  <div class="" :key="post.id">
+  <div class="post" :key="post.id">
     <h1>{{ post.title }}</h1>
-    <p v-if="post.date">Published: {{ post.date }}</p>
-    <p v-if="post.edit_date">Updated: {{ post.edit_date }}</p>
-    <p>{{ post.content }}</p>
+    <p v-if="post.date">{{ $t('post.published') }}: {{ post.date }}</p>
+    <p v-if="post.edit_date">{{ $t('post.updated') }}: {{ post.edit_date }}</p>
+    {{ post.content }}
   </div>
     </div>
 </template>
@@ -44,9 +44,13 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.error {
-  color: rgba(11, 116, 238, 0.93);
-}
+
+  .error {
+    color: rgba(11, 116, 238, 0.93);
+  }
+  .post {
+    animation: fadein 2s;
+  }
+
 </style>

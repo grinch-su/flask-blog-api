@@ -33,18 +33,23 @@ def create_db():
     return ('All tables created')
 
 
-# class Users(db.Model):
+# class User(db.Model):
 #     __tablename__ = 'users'
 #     name = db.Column(db.String, nullable=False)
 #     email = db.Column(db.String, nullable=False)
 
-
-class Posts(db.Model):
+# class Lang(db.Model):
+#     __tablename__ = 'languages'
+#     id = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.String)
+#
+class Post(db.Model):
     __tablename__ = 'posts'
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
     content = db.Column(db.String, nullable=False)
+    # lang = db.Column(db.String)
     timestamp = db.Column(db.DateTime, nullable=False)
     edit_date = db.Column(db.DateTime)
 
@@ -74,7 +79,7 @@ api = Blueprint('api',__name__, url_prefix='/api')
 def createPost():
     title = request.get_json()["title"]
     content = request.get_json()["content"]
-    post = Posts(title=title, content=content)
+    post = Post(title=title, content=content)
     curr_session = db.session
     try:
         curr_session.add(post)
@@ -83,14 +88,14 @@ def createPost():
         curr_session.rollback()
         curr_session.flush()
     postId = post.id
-    data = Posts.query.filter_by(id=postId).first()
+    data = Post.query.filter_by(id=postId).first()
     return jsonify(post=data.to_json())
 
 
 # get all posts
 @api.route('/posts', methods=['GET'])
 def getPosts():
-    data = Posts.query.all()
+    data = Post.query.all()
     if not data:
         return jsonify(posts=None)
     return jsonify(posts=[post.to_json()for post in data])
@@ -99,7 +104,7 @@ def getPosts():
 # get post
 @api.route('/post/<int:postId>', methods=['GET'])
 def get_post(postId):
-    data = Posts.query.get(postId)
+    data = Post.query.get(postId)
     if not data:
         abort(404)
     return jsonify(post=data.to_json())
@@ -114,7 +119,7 @@ def updatePost(postId):
     content = request.get_json()["content"]
     curr_session = db.session
     try:
-        post = Posts.query.filter_by(id=postId).first()
+        post = Post.query.filter_by(id=postId).first()
         post.title = title
         post.content = content
         post.edit_date = datetime.now()
@@ -124,7 +129,7 @@ def updatePost(postId):
         curr_session.flush()
         return jsonify(message='No post found')
     postId = post.id
-    data = Posts.query.filter_by(id=postId).first()
+    data = Post.query.filter_by(id=postId).first()
 
     return jsonify(post=data.to_json())
 
@@ -133,7 +138,7 @@ def updatePost(postId):
 @api.route('/post/<int:postId>', methods=['DELETE'])
 def deletePost(postId):
     curr_session = db.session
-    Posts.query.filter_by(id=postId).delete()
+    Post.query.filter_by(id=postId).delete()
     curr_session.commit()
     return getPosts()
 
