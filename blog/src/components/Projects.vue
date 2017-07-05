@@ -3,12 +3,13 @@
   <div class="loading" v-if="loading">
     <h1>{{ $t('loading') }}...</h1>
   </div>
+  <div class="projects">
   <div class="card-project" v-for="rep in repos">
     <div class="header">
       <h4>{{ rep.name }}</h4>
       <p>{{ rep.lang }}</p>
     </div>
-    <div class="container">
+    <div class="content">
       <p>{{ rep.description }}</p>
       <p>{{ $t('project.updated') }}: {{ rep.updated_at }}</p>
     </div>
@@ -17,6 +18,7 @@
       <a class="button" :href="rep.url" target="_blank">{{ $t('project.source') }}</a>
     </div>
   </div>
+    </div>
 </div>
 </template>
 
@@ -54,35 +56,29 @@
 <style scoped>
   .card-project {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
     background-color: white;
-    width: 28%;
+    width: 45%;
     display: inline-block;
-    margin: 0.5em;
-    padding: 1%;
-    animation: fadein 2s;
+    position: relative;
+    border-radius: 2px;
+    padding: 1.5%;
+    height: 250px;
+    margin: 0.5%;
   }
-
   .loading {
     text-align: center;
   }
-
   .card-project:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   }
-
   .header{
     text-align: center;
+    height: 25%;
   }
-
-  .container {
-    padding: 2px 16px;
+  .content {
+    height: 50%;
   }
-
-  .button {
-    background-color: #23241f;
-    text-decoration: none;
-    color: white;
-    padding: 5px;
+  .footer {
+    height: 25%;
   }
 </style>

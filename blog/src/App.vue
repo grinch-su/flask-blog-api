@@ -22,15 +22,9 @@
 </template>
 
 <script>
-  import Home from './components/Home.vue'
-  import Post from './components/Post.vue'
-  import Projects from './components/Projects.vue'
-  import Contacts from './components/Contacts.vue'
-
   export default {
     name: 'app',
     components: {
-      Home, Post, Projects, Contacts
     },
     data () {
       return {
@@ -46,6 +40,12 @@
 </script>
 
 <style>
+  * {
+    /*.loading, .card-project {*/
+    animation: fadein 1s;
+    transition: 0.2s;
+  /*}*/
+  }
   html {
     margin: 0;
     padding: 0;
@@ -111,5 +111,18 @@
     color: white;
     padding: 3px;
     font: 16px/1 Helvetica, Verdana, sans-serif;
+  }
+  .button {
+    background-color: #606060;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.6s;
+    border-radius: 2px;
+    padding: 1%;
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  .button:hover {
+    background-color: black;
   }
 </style>

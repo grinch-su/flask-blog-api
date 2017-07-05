@@ -1,6 +1,6 @@
 <template>
   <div class="posts">
-    <div class="loading" v-if="loading > 1">
+    <div class="loading" v-if="loading">
       <h1> {{ $t('loading') }}...</h1>
     </div>
     <div v-if="error" class="error">
@@ -14,8 +14,8 @@
         </router-link>
         <p>{{ $t('post.published') }}: {{ post.date }}</p>
       </div>
-      <div class="card-container">
-        <p>{{ post.content | truncate(70) }}</p>
+      <div class="card-content">
+        <p>{{ post.content | truncate(100) }}</p>
       </div>
       <div class="card-footer">
         <router-link class="button" :to="{ name: 'post', params: { id: post.id }}">
@@ -56,14 +56,9 @@ export default {
 
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .posts {
-    animation: fadein 2s;
-    transition: 0.3s;
-  }
   .not-posts {
-    color: rgba(120, 124, 129, 0.51);
+    color: rgba(167, 155, 155, 0.84);
     text-align: center;
   }
 
@@ -78,36 +73,35 @@ export default {
   .card-blog {
     background-color: white;
     width: 60%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     border-radius: 2px;
     display: inline-block;
-    margin: 0.5em;
-    padding: 1em;
+    position: relative;
+    margin: 0.5%;
+    height: 240px;
+    padding: 1.5%;
   }
-
+  .card-blog:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
+  .card-header {
+    height: 25%;
+  }
   .card-header a {
-    color: #000000;
+    color: #575757;
     text-decoration: none;
   }
 
   .card-header a:hover {
-    color: #575757;
-    text-decoration:none;
-    cursor:pointer;
+    color: #000000;
   }
-
-  .card-footer .button {
-    background-color: #606060;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.6s;
-    border-radius: 2px;
-    padding: 1%;
-    text-decoration: none;
-    color: #ffffff;
+  .card-content {
+    height: 46%;
+    padding-top: 2%;
+    padding-bottom:2%;
   }
-
-  .card-footer .button:hover {
-    background-color: black;
-    box-shadow: 0 8px 16px 0 rgb(0, 0, 0);
+  .card-footer {
+    height: 25%;
   }
 </style>

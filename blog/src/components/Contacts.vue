@@ -33,7 +33,6 @@
   }
   .contacts li a {
     color: #767676;
-    transition: 0.6s;
   }
   .contacts li a:hover {
     color: #000000;
@@ -41,6 +40,5 @@
   .contacts{
     list-style: none;
     text-align: center;
-    animation: fadein 2s;
   }
 </style>
