@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, abort
 from flask.views import MethodView
-
+from app.user.models import User
 
 user = Blueprint('user', __name__)
 
@@ -15,5 +15,5 @@ class UserView(MethodView):
         pass
     def delete(self):
         pass
-    def path(self):
+    def patch(self):
         pass

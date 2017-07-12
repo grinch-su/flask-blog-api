@@ -1,10 +1,23 @@
 from datetime import datetime
 from app import db
 
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), unique=True, nullable=False)
+
+    def __init__(self, name):
+        self.name = name
+
+    def to_json(self):
+        category = {
+            "id": self.id,
+            "name": self.name
+        }
+        return category
+
 class Language(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False, unique=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __init__(self, name):
         self.name = name
@@ -25,9 +38,14 @@ class Article(db.Model):
     title = db.Column(db.String, nullable=False)
     content = db.Column(db.String, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User',
+        backref=db.backref('articles', lazy='dynamic'))
     lang_id = db.Column(db.Integer, db.ForeignKey('language.id'))
     language = db.relationship('Language',
-        backref=db.backref('languages', lazy='dynamic'))
+        backref=db.backref('articles', lazy='dynamic'))
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    category = db.relationship('Category',
+        backref=db.backref('articles', lazy='dynamic'))
     timestamp = db.Column(db.DateTime, nullable=False)
     edit_date = db.Column(db.DateTime)
 

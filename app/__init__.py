@@ -32,8 +32,9 @@ from app.article.views import article
 from app.comment.views import comment
 from app.user.views import user
 
-app.register_blueprint(article)
 app.register_blueprint(user)
+app.register_blueprint(article)
+app.register_blueprint(comment)
 
 
 @app.route("/", methods=['GET'])
