@@ -3,12 +3,13 @@ from app import db
 
 class Language(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
+    name = db.Column(db.String, nullable=False, unique=True)
     articles = db.relationship('Article', backref='language',
                                 lazy='dynamic')
 
     def __init__(self, name):
         self.name = name
+    
     def __repr__(self):
         return '< Lang %d >' % self.name
 
@@ -27,4 +28,4 @@ class Article(db.Model):
         self.timestamp = datetime.now()
 
     def __repr__(self):
-        return '<Posts {} {}>'.format(self.title, self.content)
+        return '<Posts %d %d>' % self.title, self.content

@@ -1,6 +1,7 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAclhemy
+from flask import Flask, render_template, jsonify
+from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
+from flask_script import Manager
 
 class CustomFlask(Flask):
   jinja_options = Flask.jinja_options.copy()
@@ -13,7 +14,7 @@ class CustomFlask(Flask):
     comment_end_string='#)',
   ))
 
-app = CustomFlask(__name__)
+app = CustomFlask(__name__,template_folder='templates')
 
 app.config.update(
     DEBUG=True,
@@ -23,7 +24,8 @@ app.config.update(
     SQLALCHEMY_ECHO=False
 )
 
-db = SQLAclhemy(app)
+db = SQLAlchemy(app)
+manager = Manager(app)
 migrate = Migrate(app, db)
 
 from app.article.views import article
@@ -32,3 +34,29 @@ from app.user.views import user
 
 app.register_blueprint(article)
 app.register_blueprint(user)
+
+
+@app.route("/", methods=['GET'])
+def index():
+    return render_template('map-api.html')
+
+
+# @app.route("/api-map", methods=['GET'])
+# def site_map():
+#     import urllib
+#     output = []
+#     for rule in app.url_map.iter_rules():
+#         methods = []
+#         for m in rule.methods:
+#             meth = urllib.parse.unquote("{}".format(m))
+#             if m not in ('OPTIONS','HEAD'):
+#                 methods.append(meth)
+#         line = {
+#             'methods': methods,
+#             'rule': urllib.parse.unquote("{}".format(rule))
+#         }
+#         if '/' in urllib.parse.unquote("{}".format(rule)):
+#             output.append(line)
+#         else:
+#             continue
+#     return jsonify(links=output)

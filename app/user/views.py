@@ -1,8 +1,11 @@
 from flask import Blueprint, jsonify, request, abort
 from flask.views import MethodView
+
+
 user = Blueprint('user', __name__)
 
-class UserAPI(MethodView):
+
+class UserView(MethodView):
 
     def get(self):
         pass
