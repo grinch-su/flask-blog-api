@@ -30,11 +30,13 @@ migrate = Migrate(app, db)
 
 from app.article.views import article
 from app.comment.views import comment
+from app.tag.views import tag
 from app.user.views import user
 
 app.register_blueprint(user)
 app.register_blueprint(article)
 app.register_blueprint(comment)
+app.register_blueprint(tag)
 
 
 @app.route("/", methods=['GET'])
@@ -42,22 +44,22 @@ def index():
     return render_template('map-api.html')
 
 
-# @app.route("/api-map", methods=['GET'])
-# def site_map():
-#     import urllib
-#     output = []
-#     for rule in app.url_map.iter_rules():
-#         methods = []
-#         for m in rule.methods:
-#             meth = urllib.parse.unquote("{}".format(m))
-#             if m not in ('OPTIONS','HEAD'):
-#                 methods.append(meth)
-#         line = {
-#             'methods': methods,
-#             'rule': urllib.parse.unquote("{}".format(rule))
-#         }
-#         if '/' in urllib.parse.unquote("{}".format(rule)):
-#             output.append(line)
-#         else:
-#             continue
-#     return jsonify(links=output)
+@app.route("/api-map", methods=['GET'])
+def site_map():
+    import urllib
+    output = []
+    for rule in app.url_map.iter_rules():
+        methods = []
+        for m in rule.methods:
+            meth = urllib.parse.unquote("{}".format(m))
+            if m not in ('OPTIONS','HEAD'):
+                methods.append(meth)
+        line = {
+            'methods': methods,
+            'rule': urllib.parse.unquote("{}".format(rule))
+        }
+        if '/api/' in urllib.parse.unquote("{}".format(rule)):
+            output.append(line)
+        else:
+            continue
+    return jsonify(links=output)
